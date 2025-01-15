@@ -116,7 +116,7 @@ def update_histogram(t_idx):
     )
     ax2.legend()
     ax2.grid()
-    
+
     # Aggiorna la linea dell'invested capital sul grafico a sinistra
     invested_capital = [(S0 + s * (time / P)) / 1000 for time in t]
     invested_capital_line.set_data(t, invested_capital)
