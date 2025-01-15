@@ -1,6 +1,6 @@
-# Investment Portfolio Time Simulation Tool
+# Monte Carlo investment simulation tool
 
-This software simulates the growth of an investment portfolio over a specified time horizon using the Black-Scholes model. It allows users to input initial capital, expected yearly return, and volatility, among other parameters, to visualize potential outcomes and risk assessments.
+This software simulates the growth of an investment portfolio over a specified time horizon using the Black-Scholes model (Geometric Brownian Motion). It allows users to input initial capital, expected yearly return, and volatility, among other parameters, to visualize potential outcomes and risk assessments.
 
 ## Features
 
