@@ -107,7 +107,7 @@ def run_simulation():
         ax2.legend()
         ax2.grid()
 
-        invested_capital = [(S0 + s * (time / P)) / 1000 for time in t]
+        invested_capital = [(S0 + s * int(time / P)) / 1000 for time in t]
         invested_capital_line.set_data(t, invested_capital)
         fig.canvas.draw_idle()
 
@@ -149,7 +149,7 @@ entry_s = ttk.Entry(frame)
 entry_T.insert(0, "10")
 entry_mu.insert(0, "8.33")
 entry_sigma.insert(0, "10.87")
-entry_S0.insert(0, "28000")
+entry_S0.insert(0, "30000")
 entry_P.insert(0, "1")
 entry_s.insert(0, "500")
 
