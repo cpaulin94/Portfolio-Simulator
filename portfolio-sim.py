@@ -6,6 +6,8 @@ from matplotlib.gridspec import GridSpec
 import tkinter as tk
 from tkinter import ttk
 import sv_ttk
+from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
+
 
 # Set dark mode if enabled
 nightmode = True
@@ -47,7 +49,7 @@ def run_simulation():
         return
 
     # Fixed parameters
-    N = 2520  # Number of time steps
+    N = 2500  # Number of time steps
     dt = T / N  # Time step
     NSims = 500  # Number of simulations
     alphaVal = 30 / NSims
@@ -73,11 +75,23 @@ def run_simulation():
             S_i = V_i * np.exp((mu - 0.5 * sigma**2) * p + sigma * np.cumsum(dW))
             V_i = S_i[-1] + s
             S = np.concatenate((S, S_i))
+        #print(f'T = {T}, P = {P}, int(T/P) = {int(T/P)}, len(S) = {len(S)}' )
 
-        simulations[i, :len(S)] = S
+        S = S[:N]
+        simulations[i] = S
         ax1.plot(np.arange(0, len(S) * dt, dt), S / 1000, color='lightgreen', alpha=alphaVal)
 
-    ax1.grid()
+
+    # grid and plot settings
+
+    ax1.grid(visible=True, which='major')
+    ax1.grid(visible=True, which='minor', linestyle='--', linewidth=0.5, alpha=0.5)
+    ax1.xaxis.set_major_locator(MultipleLocator(1*(int((T-0.001)/10)+1)))
+
+
+    ax1.xaxis.set_minor_locator(AutoMinorLocator(12/(int((T-0.001)/10)+1)))
+    ax1.yaxis.set_minor_locator(AutoMinorLocator(5))
+
     ax1.set_xlabel('Time [y]')
     ax1.set_ylabel('Value [k€]')
     ax1.set_title(f'The graph shows {NSims} Black–Scholes model simulations of a capital of {S0/1000:.1f}k€ + {s}€/month\n'
@@ -103,7 +117,7 @@ def run_simulation():
         ax2.axhline(perc_95, color='gold', linestyle='--', label=f'95th Percentile ({perc_95:.1f}k€)')
         ax2.set_xlabel('Probability density')
         ax2.set_xticks([])
-        ax2.set_title(f'Smoothed histogram of \n portfolio values at {int(t_idx * dt)} years and {int((t_idx * dt * 12) % 12)} months')
+        ax2.set_title(f'Smoothed histogram of \n portfolio values at {int((t_idx+1) * dt)} years and {int(((t_idx+1) * dt * 12) % 12)} months')
         ax2.legend()
         ax2.grid()
 
@@ -147,8 +161,8 @@ entry_s = ttk.Entry(frame)
 
 # Set default values
 entry_T.insert(0, "10")
-entry_mu.insert(0, "8.33")
-entry_sigma.insert(0, "10.87")
+entry_mu.insert(0, "8.42")
+entry_sigma.insert(0, "10.09")
 entry_S0.insert(0, "30000")
 entry_P.insert(0, "1")
 entry_s.insert(0, "500")
