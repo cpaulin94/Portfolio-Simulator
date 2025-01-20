@@ -56,16 +56,14 @@ Ensure these libraries are installed before running the application.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/portfolio-sim.git
+   git clone https://github.com/cpaulin94/portfolio-sim
    cd portfolio-sim
 2. Install the dependencies:
    ```bash
-   git clone https://github.com/your-repo/investment-portfolio-simulation.git
    pip install numpy matplotlib scipy sv_ttk
 3. Run the application:
    ```bash
    python portfolio-sim.py
-
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
